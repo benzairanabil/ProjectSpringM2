@@ -11,6 +11,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+
 import javax.transaction.Transactional;
 
 import java.lang.reflect.Type;
@@ -59,17 +60,21 @@ public class ArticleServiceImp implements IArticleService {
     }
 
     @Override
-    public void deleteArticle(int id, String username) {
+    public void deleteArticle(Long id,String username) {
+    	
         if (!repository.existsArticleOnPanier(id) && username.equals(repository.findById(id).get().getVendeur().getUsername()))
             repository.deleteById(id);
         else System.out.println("can't remove this article");
+        
+		
+
     }
 
     @Override
-    public ArticleDto selectOne(int id) {
+    public ArticleDto selectOne(Long id) {
     	
         
-        Article articelEntity = repository.findById(id).get();
+        Article articelEntity = repository.findArticleByid(id);
 		
 		ArticleDto ArticleDto = modelMapper.map(articelEntity, ArticleDto.class);
 		
@@ -129,5 +134,9 @@ public class ArticleServiceImp implements IArticleService {
         
         return articlesDto;
     }
+
+
+
+
 
 }

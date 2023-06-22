@@ -12,10 +12,11 @@ public interface IArticleService {
     ArticleDto insertArticle(ArticleDto a, String username);
 
     ArticleDto updateArticle(ArticleDto a, String username);
+    
 
-    void deleteArticle(int id, String username);
+    void deleteArticle(Long id, String username);
 
-    ArticleDto selectOne(int id);
+    ArticleDto selectOne(Long id);
 
     List<ArticleDto> selectAll();
 

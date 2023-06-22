@@ -40,7 +40,7 @@ public class ArticleController {
     }
 
     @GetMapping(path = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ArticleDto getOne(@PathVariable("id") int id) {
+    public ArticleDto getOne(@PathVariable("id") Long id) {
         return service.selectOne(id);
     }
 
@@ -73,7 +73,7 @@ public class ArticleController {
 
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     @DeleteMapping(path = "/{id}")
-    public void deleteOne(@PathVariable("id") int id, @RequestHeader("Authorization") String auth) {
+    public void deleteOne(@PathVariable("id") Long id, @RequestHeader("Authorization") String auth) {
         String username = checkUser.getUsername(auth);
         service.deleteArticle(id, username);
     }

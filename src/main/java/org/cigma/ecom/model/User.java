@@ -11,12 +11,20 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.persistence.Table;
+
+import java.io.Serializable;
 import java.util.List;
 
 @Getter
 @Setter
 @Entity
-public class User {
+@Table(name = "T_USER")
+public class User implements Serializable{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	@Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(nullable = false)
@@ -38,9 +46,7 @@ public class User {
     private List<Article> listArticles;
 
     public void setUsername(String username) {
-        if(this.password == null){
             this.username = username;
-        }
     }
 
     public void setId(Long id) {

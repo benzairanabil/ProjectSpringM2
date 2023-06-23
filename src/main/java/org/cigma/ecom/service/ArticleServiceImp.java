@@ -1,6 +1,7 @@
 package org.cigma.ecom.service;
 
 import org.cigma.ecom.dto.ArticleDto;
+import org.cigma.ecom.exceptions.ArticleException;
 import org.cigma.ecom.model.Article;
 import org.cigma.ecom.repository.ArticleRepository;
 import org.cigma.ecom.repository.UserRepository;
@@ -56,7 +57,10 @@ public class ArticleServiceImp implements IArticleService {
     		
     		return ArticleDto;
         }
-        return null;
+        else {
+        	throw new ArticleException("Can't update this article !!!");
+        }
+        //return null;
     }
 
     @Override
@@ -64,7 +68,7 @@ public class ArticleServiceImp implements IArticleService {
     	
         if (!repository.existsArticleOnPanier(id) && username.equals(repository.findById(id).get().getVendeur().getUsername()))
             repository.deleteById(id);
-        else System.out.println("can't remove this article");
+        else throw new ArticleException("can't remove this article !!!");
         
 		
 

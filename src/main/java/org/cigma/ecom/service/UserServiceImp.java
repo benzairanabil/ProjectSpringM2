@@ -22,7 +22,9 @@ public class UserServiceImp implements IUserService {
 
     @Override
     public User insertUser(User u) {
-        if (repository.existsById(u.getId()) || repository.existsUsername(u.getUsername()) || repository.existsEmail(u.getEmail())){
+    	//u.setId(null);
+    	
+        if (repository.existsUsername(u.getUsername()) || repository.existsEmail(u.getEmail())){
             System.out.println("Signup refused !!!");
             System.out.println("ID = " + u.getId() + " ~ Username = " + u.getUsername() + " ~ Email = " + u.getEmail());
             return null;

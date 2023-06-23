@@ -38,6 +38,7 @@ public class JwtUserDetailsService implements UserDetailsService {
             	comptAuthority = authorityListUser;
         }else {
             System.out.println("Compt NOT-FOUND");
+            //throw new UsernameNotFoundException("Compt NOT-FOUND");
             u = new org.cigma.ecom.model.User();
             comptAuthority = authorityListGuest;
         }

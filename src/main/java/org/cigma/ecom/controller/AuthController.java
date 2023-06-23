@@ -3,6 +3,7 @@ package org.cigma.ecom.controller;
 import org.cigma.ecom.dto.UserDto;
 import org.cigma.ecom.dto.UserLoginRequest;
 import org.cigma.ecom.dto.UserLoginResponse;
+import org.cigma.ecom.exceptions.UserException;
 import org.cigma.ecom.model.User;
 import org.cigma.ecom.service.IUserService;
 import org.cigma.ecom.service.JwtUserDetailsService;
@@ -21,6 +22,7 @@ import org.springframework.security.authentication.DisabledException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
+
 
 @CrossOrigin
 @RestController
@@ -53,28 +55,32 @@ public class AuthController {
             authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(username, password));
             System.out.println("Authenticate Username : "+username);
         } catch (DisabledException e) {
-            throw new Exception("USER_DISABLED", e);
+            //throw new Exception("USER_DISABLED", e);
+            throw new UserException("USER_DISABLED");
         } catch (BadCredentialsException e) {
-            throw new Exception("INVALID_CREDENTIALS", e);
+            //throw new Exception("INVALID_CREDENTIALS", e);
+            throw new UserException("INVALID_CREDENTIALS");
         }
     }
 
-    @PostMapping(value = "/user/signup",consumes = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<?> clientSignUp(@RequestBody UserLoginResponse userDto) throws Exception {
+    @PostMapping(value = "/signup",consumes = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<?> clientSignUp(@RequestBody UserDto userDto) throws Exception {
         HttpStatus status; 		
+        System.out.println("UserNAme"+userDto.getUsername());
 		User user = modelMapper.map(userDto, User.class);
+		System.out.println("user serv "+user.getUsername());
 		user = userService.insertUser(user);
         if (user == null)
             status = HttpStatus.NOT_ACCEPTABLE;
         else {
             status = HttpStatus.OK;
             //send Mail
-            smtpService.SendMail(user);
+            //smtpService.SendMail(user);
             //Just for security the password don't return to client
-            user.setPassword("xxxxxx", user.getPassword());
+            //user.setPassword("xxxxxx", user.getPassword());
         }
         
-        return new ResponseEntity<>(modelMapper.map(user, UserDto.class),status);
+        return new ResponseEntity<>(modelMapper.map(user, UserLoginResponse.class),status);
 
     }
     /*

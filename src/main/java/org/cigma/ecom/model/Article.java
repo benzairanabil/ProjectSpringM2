@@ -24,6 +24,7 @@ public class Article implements Serializable {
     private int prix = 0;
     private String type;
     private int stock = 0;
+    @ElementCollection
     private List<String> listImages;
 
     @ManyToOne(fetch = FetchType.LAZY)

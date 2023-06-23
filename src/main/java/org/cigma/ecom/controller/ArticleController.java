@@ -1,6 +1,8 @@
 package org.cigma.ecom.controller;
 
 import org.cigma.ecom.dto.ArticleDto;
+import org.cigma.ecom.exceptions.ArticleException;
+import org.cigma.ecom.exceptions.UserException;
 import org.cigma.ecom.service.IArticleService;
 import org.cigma.ecom.util.CheckUser;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,6 +26,7 @@ public class ArticleController {
 
     @GetMapping(params = {"pageNumber", "pageSize"})
     public Page<ArticleDto> getPage(@RequestParam("pageNumber") int pageNumber, @RequestParam("pageSize") int pageSize) {
+    	if(pageNumber==0)pageNumber=1;
         Pageable pageParams = PageRequest.of(pageNumber, pageSize);
         return service.getPage(pageParams);
     }
@@ -59,7 +62,10 @@ public class ArticleController {
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     @PostMapping(path = "/create", produces = MediaType.APPLICATION_JSON_VALUE)
     public ArticleDto add(@RequestBody ArticleDto a, @RequestHeader("Authorization") String auth) {
-        String username = checkUser.getUsername(auth);
+    	System.out.println("tfoou auth"+auth);
+    	String username = checkUser.getUsername(auth);
+        System.out.println("tfoou"+username);
+        if(a.getStock()<=0) throw new ArticleException("can't add article with stock <= 0");
         return service.insertArticle(a, username);
     }
 

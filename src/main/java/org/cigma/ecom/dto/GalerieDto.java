@@ -1,9 +1,14 @@
 package org.cigma.ecom.dto;
 
 import java.io.Serializable;
+import java.util.List;
+
+import lombok.Getter;
+import lombok.Setter;
 
 
-
+@Getter
+@Setter
 public class GalerieDto implements Serializable{
 	
 	  	/**
@@ -14,22 +19,5 @@ public class GalerieDto implements Serializable{
 	    private ArticleDto article;
 	    private byte[] image;
 	    
-		public int getId() {
-			return id;
-		}
-		public void setId(int id) {
-			this.id = id;
-		}
-		public ArticleDto getArticle() {
-			return article;
-		}
-		public void setArticle(ArticleDto article) {
-			this.article = article;
-		}
-		public byte[] getImage() {
-			return image;
-		}
-		public void setImage(byte[] image) {
-			this.image = image;
-		}
+
 }

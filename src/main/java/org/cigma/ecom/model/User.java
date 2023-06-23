@@ -44,62 +44,6 @@ public class User implements Serializable{
     private List<Panier> paniers;
     @OneToMany(fetch = FetchType.LAZY, cascade = {CascadeType.ALL})
     private List<Article> listArticles;
-
-    public void setUsername(String username) {
-            this.username = username;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public void setPassword(String newPassword, String oldPassword) {
-        if (this.password == oldPassword) {
-            this.password = newPassword;
-        }
-    }
-
-    public void hidePassword() {
-        this.password = "xxxxxx";
-    }
-
-    public boolean signin(String username, String password) {
-        if (this.username == username || this.email == username) {
-            return this.password == password;
-        } else {
-            return false;
-        }
-    }
-
-    public void setRole(String role) {
-        this.role = role;
-    }
-    public void setNom(String nom) {
-        this.nom = nom;
-    }
-
-    public void setTele(String tele) {
-        this.tele = tele;
-    }
-
-    public void setListArticles(List<Article> listArticles) {
-        this.listArticles = listArticles;
-    }
-
-    public String getNom() {
-        return nom;
-    }
-
-    public String getTele() {
-        return tele;
-    }
-
-    public List<Article> getListArticles() {
-        return listArticles;
-    }
+ 
 
 }

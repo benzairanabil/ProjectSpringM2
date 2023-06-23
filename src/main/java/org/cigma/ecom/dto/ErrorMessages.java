@@ -1,5 +1,9 @@
 package org.cigma.ecom.dto;
 
+import java.util.List;
+
+
+
 public enum ErrorMessages {
 	
 	MISSING_REQUIRED_FIELD("Missing required field."),

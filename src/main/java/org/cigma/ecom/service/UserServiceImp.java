@@ -29,7 +29,7 @@ public class UserServiceImp implements IUserService {
             System.out.println("ID = " + u.getId() + " ~ Username = " + u.getUsername() + " ~ Email = " + u.getEmail());
             return null;
         }
-        u.setPassword(passwordEncoder.encode(u.getPassword()),u.getPassword());
+        u.setPassword(passwordEncoder.encode(u.getPassword()));
         u.setRole("USER");
         return repository.save(u);
     }

@@ -2,6 +2,11 @@ package org.cigma.ecom.dto;
 
 import java.util.Date;
 
+import lombok.Getter;
+import lombok.Setter;
+
+@Getter
+@Setter
 public class ErrorMessage {
 	
 	private Date timestamp;
@@ -13,22 +18,6 @@ public class ErrorMessage {
 		this.message = message;
 	}
 
-	public Date getTimestamp() {
-		return timestamp;
-	}
-
-	public void setTimestamp(Date timestamp) {
-		this.timestamp = timestamp;
-	}
-
-	public String getMessage() {
-		return message;
-	}
-
-	public void setMessage(String message) {
-		this.message = message;
-	}
-	
 	
 
 }

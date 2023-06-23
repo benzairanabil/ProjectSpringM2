@@ -19,7 +19,7 @@ public class ArticleDto implements Serializable{
 	    private String type;
 	    private int stock = 0;
 	    private String thumbnail;
-	    private UserDto vendeur;
+	    private UserLoginResponse vendeur;
 	    private List<String> listImages;
 	    
 	    public List<String> getListImages() {
@@ -70,10 +70,10 @@ public class ArticleDto implements Serializable{
 		public void setThumbnail(String thumbnail) {
 			this.thumbnail = thumbnail;
 		}
-		public UserDto getVendeur() {
+		public UserLoginResponse getVendeur() {
 			return vendeur;
 		}
-		public void setVendeur(UserDto vendeur) {
+		public void setVendeur(UserLoginResponse vendeur) {
 			this.vendeur = vendeur;
 		}
 		
